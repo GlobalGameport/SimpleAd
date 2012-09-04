@@ -15,7 +15,7 @@ $block = _simplead_format($ad, $format);
 
 
 function _simplead_random_top_ad($gid) { 
-  include_once('ads.php');
+  include_once('ads.inc.php');
   
   $ads = multisort($ads[$gid], 'weight');
   $cads = count($ads);
@@ -57,7 +57,7 @@ function  _simplead_get_adGrpId($pgurl) {
   }
   
   
-  include_once('domains.php');
+  include_once('domains.inc.php');
   
   if(isset($host) && array_key_exists($host.$domain, $domain_mappings)){
       $gid = $domain_mappings[$host.$domain];
