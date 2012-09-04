@@ -11,31 +11,26 @@ $ad = _simplead_random_top_ad($gid);
 
 $block = _simplead_format($ad, $format);
 
-// _simplead_output_js($block);
+_simplead_output_js($block);
 
 
 function _simplead_random_top_ad($gid) { 
   include_once('ads.inc.php');
+  $ads = multisort($ads[$gid], 'weight', 'formats', 'type');
   
-  $ads = multisort($ads[$gid], 'weight');
   $cads = count($ads);
-  $rand = rand(1,100);
-  switch ($rand) {
-    case ($rand <= 10):
-    case ($rand <= 20):
-    case ($rand <= 30):
-    case ($rand <= 60):
-    case ($rand <= 100):
-  }
-  for($i=0;$i==cads;$I++) {
+
+  for($i=0;$i==$cads;$I++) {
     $rand = rand(1,100);
-    if($rand >= 90) {
-      return $ads[$i]
+    if($rand >= 93) {
+      return $ads[$i];
     }
   }
     if (rand(1,100)<20) shuffle($ads); 
 
-  return $ads[0];
+    $ad = array_shift($ads);
+
+  return $ad;
 }
 
 function _simplead_output_js($js){
@@ -51,7 +46,7 @@ function  _simplead_get_adGrpId($pgurl) {
   } else {
     $parts = explode(".", $domain);
     $parts = array_reverse($parts);
-    $domain = $parts[1].$parts[0];
+    $domain = $parts[1].'.'.$parts[0];
     if(isset($parts[3]))
     $host = $parts[3];
   }
@@ -59,13 +54,15 @@ function  _simplead_get_adGrpId($pgurl) {
   
   include_once('domains.inc.php');
   
-  if(isset($host) && array_key_exists($host.$domain, $domain_mappings)){
-      $gid = $domain_mappings[$host.$domain];
+  if(isset($host) && array_key_exists($host.'.'.$domain, $domain_mappings)){
+      $gid = $domain_mappings[$host.'.'.$domain];
   }
-  else {
+  elseif(array_key_exists($domain, $domain_mappings)) {
     $gid = $domain_mappings[$domain];
   }
- 
+  else {
+    $gid = $domain_mappings['*'];
+  }
     
   return $gid;  
 }
@@ -76,16 +73,16 @@ define("CODE", 1);
 define("IMAGE", 2);
 */
 function _simplead_format($ad, $format) {
+
   if(isset($ad['formats'][$format])){
-    $adf = $ad['formats'][$format]);
+    $adf = $ad['formats'][$format];
     switch($ad['type']) {
       case 0:
       case 1:
-          return $adf['code'];
-        } 
+          return $adf['code']; 
       break;
       case 2:
-          $code = 'document.write(\'&lt;a href="'.$adf["url"].'" &gt;&lt;im\' + \'g type="text/javascript" src="'.$adf["image"].'" /&gt;&lt;/a&gt;\');';
+          $code = 'document.write(\'<a href="'.$adf["url"].'" ><img type="text/javascript" src="'.$adf["image"].'" /><\/a>\');';
           return $code;
       break;
     }
@@ -106,7 +103,7 @@ function _simplead_format($ad, $format) {
     // sort by ?
     foreach ($array as $pos =>  $val)
         $tmp_array[$pos] = $val[$sort_by];
-    asort($tmp_array);
+    arsort($tmp_array);
    
     // display however you want
     foreach ($tmp_array as $pos =>  $val){
@@ -130,5 +127,11 @@ function _simplead_format($ad, $format) {
         }
     return $return_array;
     }
-
+    
+    
+function debug($var) {
+print "<pre>";
+var_dump($var);
+print "</pre>";
+}
  ?>
