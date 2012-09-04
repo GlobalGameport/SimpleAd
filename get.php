@@ -22,7 +22,7 @@ function _simplead_random_top_ad($gid) {
 
   for($i=0;$i==$cads;$I++) {
     $rand = rand(1,100);
-    if($rand >= 93) {
+    if($rand >= 90) {
       return $ads[$i];
     }
   }
