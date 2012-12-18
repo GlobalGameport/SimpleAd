@@ -1,12 +1,16 @@
 <?php
 
 
-
-$pgurl = trim(strtolower(urldecode($_GET['url']))); 
-$format = trim(strtolower(urldecode($_GET['f'])));
+if(isset($_GET['url']))
+  $pgurl = trim(strtolower(urldecode($_GET['url']))); 
+else
+  $pgurl = trim(strtolower($_SERVER['HTTP_REFERRER']));
+if(isset($_GET['f']))
+  $format = trim(strtolower(urldecode($_GET['f'])));
+else
+  $format = 'leaderboard';
 
 $gid = _simplead_get_adGrpId($pgurl);
-if (!$format) $format = 'leaderboard';
 $ad = _simplead_random_top_ad($gid); 
 
 $block = _simplead_format($ad, $format);

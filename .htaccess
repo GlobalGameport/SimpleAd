@@ -16,3 +16,5 @@ Options +FollowSymLinks
 
 
 </IfModule>
+
+FallbackResource index.php
