@@ -33,7 +33,6 @@ function _simplead_random_top_ad($gid) {
     if (rand(1,100)<20) shuffle($ads); 
 
     $ad = array_shift($ads);
-    debug($gid);
   return $ad;
 }
 
