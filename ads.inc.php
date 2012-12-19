@@ -49,5 +49,17 @@ $ads = array(
       'weight' => 10,
     ),
   ),
+  2 => array(
+    1 => array(
+      'type' => IMAGE,
+      'formats' => array(
+        'leaderboard' => array(
+          'image' => 'http://static.globalgameport.com/b4nner/preorder_assassinscreed3.gif',
+          'url' => 'http://shop.globalgameport.com/?s=%22assassin%27s+creed+III%22&n=37',
+        ),
+      ),
+      'weight' => 10,
+    ),
+  ),
 );
 ?>

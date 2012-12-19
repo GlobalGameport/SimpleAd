@@ -14,7 +14,7 @@ $gid = _simplead_get_adGrpId($pgurl);
 $ad = _simplead_random_top_ad($gid); 
 
 $block = _simplead_format($ad, $format);
-
+header();
 _simplead_output_js($block);
 
 
@@ -33,7 +33,7 @@ function _simplead_random_top_ad($gid) {
     if (rand(1,100)<20) shuffle($ads); 
 
     $ad = array_shift($ads);
-
+    debug($gid);
   return $ad;
 }
 
