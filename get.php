@@ -4,7 +4,7 @@
 if(isset($_GET['url']))
   $pgurl = trim(strtolower(urldecode($_GET['url']))); 
 else
-  $pgurl = trim(strtolower($_SERVER['HTTP_REFERRER']));
+  $pgurl = trim(strtolower($_SERVER['HTTP_REFERER']));
 if(isset($_GET['f']))
   $format = trim(strtolower(urldecode($_GET['f'])));
 else
